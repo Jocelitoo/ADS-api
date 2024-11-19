@@ -3,10 +3,6 @@ import { prisma } from '../client';
 import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express';
 
-interface UserRequestParams {
-    id: string;
-}
-
 interface UserRequestBody {
     firstName: string;
     lastName: string;

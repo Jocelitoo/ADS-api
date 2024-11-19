@@ -7,7 +7,7 @@ export const userRoutes = Router();
 userRoutes.post('/', userController.store);
 userRoutes.get('/', userController.showAll);
 userRoutes.get('/:id', userController.showOne);
-userRoutes.put('/', loginRequired,userController.update);
+userRoutes.put('/', loginRequired, userController.update);
 userRoutes.delete('/', loginRequired, userController.delete);
 
 
