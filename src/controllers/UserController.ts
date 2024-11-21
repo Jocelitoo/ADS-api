@@ -13,9 +13,9 @@ interface UserRequestBody {
 
 interface UpdateUserRequestBody {
     userId: string;
-    firstName: string;
-    lastName: string;
-    email: string;
+    // firstName: string;
+    // lastName: string;
+    // email: string;
     password: string;
 }
 
@@ -137,14 +137,12 @@ class UserController {
 
     update = async (req: Request<{}, {}, UpdateUserRequestBody>, res: Response): Promise<void> => {
         try {
-            const { userId, firstName, lastName, email, password } = req.body; // Pega os dados que vieram no body da requisição  
+            const { userId,  password } = req.body; // Pega os dados que vieram no body da requisição  
 
-            // Validar firstName, lastName, email e password
+
+            // Validar password
             const formErrorMsg: string[] = [];
-
-            if (firstName.length < 2 || firstName.length > 15) formErrorMsg.push('Campo NOME precisa ter entre 2 e 15 caracteres')
-            if (lastName.length < 2 || lastName.length > 15) formErrorMsg.push('Campo SOBRENOME precisa ter entre 2 e 15 caracteres')
-            if (!isEmail(email)) formErrorMsg.push('Email inválido')
+        
             if (password.length < 6 || password.length > 20) formErrorMsg.push('Campo Senha precisa ter entre 6 e 20 caracteres')
 
             if (formErrorMsg.length > 0) {
@@ -169,30 +167,14 @@ class UserController {
                 });
 
                 return
-            }
-
-            // Verificar se o email já existe na base de dados
-            const emailExists = await prisma.user.findUnique({ where: { email: email } }) // Prisma vai acessar o model(tabela) "user" e vai procurar se existe nessa tabela algum usuário com o mesmo email enviado na requisição
-
-            if (emailExists && user.email !== email) formErrorMsg.push('Esse EMAIL já está em uso'); // Verifica se o email já existe e se o email do usuário que está fazendo a atualização é diferente do email enviado na requisição, pq assim se torna possível o usuário alterar apenas o name e deixar o msm email sem dar o erro de email já existir
-
-            if (formErrorMsg.length > 0) {
-                res.status(400).json({
-                    errors: formErrorMsg
-                })
-
-                return;
-            }
+            }           
 
             // Criptografar password
             const passwordHash = await bcrypt.hash(password, 8); // passwordHash ira receber o password  no formato "decodificado". Não utilize um valor de salt tão alto pra n gastar muito poder de processamento do servidor, prefira entre 8 e 10
 
             // Atualizar usuario
             const updatedUser = await prisma.user.update({
-                where: { id: userId }, data: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
+                where: { id: userId }, data: {                   
                     password: passwordHash
                 }
             })

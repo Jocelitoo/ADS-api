@@ -33,7 +33,7 @@ class TokenController {
 
             if (!user) {
                 res.status(400).json({
-                    error: ['Email ou senha incorreto'], // Por segurança, é importante não especificarmos se é o email que está errado ou o password
+                    error: ['Email ou senha incorreto'], // Por segurança, é importante não especificarmos se é o email que está errado ou o password                                       
                 });
 
                 return;

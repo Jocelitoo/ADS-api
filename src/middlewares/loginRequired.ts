@@ -27,7 +27,7 @@ export const loginRequired = async (req: Request, res: Response, next: NextFunct
 
         if (!user) {
             res.status(400).json({
-                error: ['Token inválido'],
+                error: 'Token inválido',
             });
 
             return
@@ -40,7 +40,7 @@ export const loginRequired = async (req: Request, res: Response, next: NextFunct
         return
     } catch (error) {
         res.status(500).json({
-            error: error,
+            error: 'Erro no token',
         });
 
         return
