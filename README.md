@@ -21,7 +21,7 @@ Ferramentas usadas na construção do backend:
 
 ## Como executar o projeto:
 
-Clone o projeto e depois de baixado entre na raiz do projeto e execute:
+Clone o projeto e depois de baixado entre na raiz do projeto e execute o comando no terminal:
 ```bash
 npm install
 ```
@@ -33,7 +33,7 @@ TOKEN_SECRET = 'Sua chave secreta para o JSON Web Token'
 TOKEN_EXPIRATION = Tempo de validade do JWT (exemplo: '3d') 
 ```
 
-execute o comando na raiz:
+execute o comando no terminal:
 ```bash
 npm run dev
 ```
