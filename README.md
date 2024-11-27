@@ -1,4 +1,5 @@
 # API DS Catalog
+API feita como trabalho final da disciplina de desenv para plataforma web.
 
 ## Funcionalidades:
 - Criação de usuários ([POST] /users)
